@@ -80,7 +80,7 @@ function startGame() {
 function flipBox(box) {
     if (!gameActive) return;
 
-    const isGreen = Math.random() < 0.65;
+    const isGreen = Math.random() < 0.75;
     box.style.backgroundColor = isGreen ? 'green' : 'red';
     box.onclick = null;
 
