@@ -1,0 +1,201 @@
+/* styles.css */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--pakistan-green);
+}
+
+:root {
+    --cadet-gray: #8a99a9ff;
+    --paynes-gray: #5e718bff;
+    --prussian-blue: #023047ff;
+    --ut-orange: #fb8500ff;
+    --selective-yellow: #ffb703ff;
+    --cornsilk: #fefae0ff;
+    --dark-moss-green: #606c38ff;
+    --pakistan-green: #283618ff;
+}
+
+.wallet-info {
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 20px;
+    background-color: var(--prussian-blue);
+    border-radius: 5px;
+    top: 15px;
+    left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--selective-yellow);
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--ut-orange);
+    /* Default button color */
+    color: var(--pakistan-green);
+    font-weight: 700;
+    font-style: italic;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: var(--paynes-gray);
+    /* Disabled button color */
+}
+
+button:hover:not(:disabled) {
+    background-color: #45a049;
+    /* Darker green on hover */
+    transform: scale(1.05);
+    /* Slightly enlarge on hover */
+}
+
+.bet-button.active {
+    background-color: #4CAF50;
+    /* Green background for active bet */
+    color: white;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 10px;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: var(--selective-yellow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.box:hover:not(.disabled) {
+    background-color: var(--prussian-blue);
+    /* Darker background on hover */
+    transform: scale(1.02);
+    /* Slightly enlarge on hover */
+}
+
+.box.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.box.green {
+    background-color: var(--dark-moss-green);
+}
+
+.box.red {
+    background-color: rgb(162, 0, 0);
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black with opacity */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    /* Centering modal content */
+}
+
+.modal-content {
+    background-color: var(--cornsilk);
+    margin: 15% auto;
+    /* Centering */
+    padding: 20px;
+    border: 4px solid var(--dark-moss-green);
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+    max-width: 500px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.modal-content p,
+.modal-content h2 {
+    margin: 0;
+    font-size: 18px;
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+}
+
+.modal-content input {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    background-color: var(--cornsilk);
+    width: 98%;
+    border: 2px solid var(--pakistan-green);
+    border-radius: 5px;
+}
+
+.modal-content button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 90px);
+        grid-template-rows: repeat(4, 90px);
+        gap: 16px;
+    }
+
+    .box {
+        height: 100px;
+        /* Adjust box height for smaller screens */
+    }
+}
