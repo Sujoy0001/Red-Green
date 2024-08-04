@@ -63,37 +63,41 @@ function startGame() {
 
     gameActive = true;
     greenCount = 0;
+    showModal("Game started! Click the boxes.");
 
     const boxes = document.querySelectorAll('.box');
     boxes.forEach(box => {
+        // Reset box state for new game
         box.style.backgroundColor = '#ddd';
+        box.classList.remove('green', 'red', 'disabled');
         box.onclick = () => flipBox(box);
-        box.classList.remove('disabled');
     });
 
     document.getElementById('endButton').disabled = false;
     document.querySelectorAll('.bet-button').forEach(btn => btn.disabled = true);
-
-    showModal("Game started! Click the boxes.");
 }
 
 function flipBox(box) {
     if (!gameActive) return;
 
-    const isGreen = Math.random() < 0.70;
+    const isGreen = Math.random() < 0.7;
     box.style.backgroundColor = isGreen ? 'green' : 'red';
     box.onclick = null;
 
     if (isGreen) {
         greenCount++;
+        box.classList.add('green');  // Add class for money image
     } else {
         gameActive = false;
+        box.classList.add('red');  // Add class for red box
+
         disableAllBoxes();
         showModal("You clicked a red box! You lose.");
+        
         // Prepare game for the next bet
         setTimeout(() => {
-            enableBettingOptions();
-        }, 2000);  // Delay to show the loss message
+            resetGame();
+        }, 2000);
         return;
     }
 }
@@ -109,7 +113,6 @@ function endGame() {
         updateWalletBalance(winnings);
     } else {
         showModal("You didn't click any green boxes. You lose.");
-        // Do not add money if no green boxes were clicked
     }
 
     gameActive = false;
@@ -135,6 +138,7 @@ function resetGame() {
 
     document.querySelectorAll('.box').forEach(box => {
         box.style.backgroundColor = '#ddd';
+        box.classList.remove('green', 'red');  // Reset classes for new game
     });
 
     // Check if wallet balance is depleted
@@ -147,30 +151,19 @@ function resetGame() {
 }
 
 function enableBettingOptions() {
-    // Re-enable betting buttons and reset the UI
-    document.querySelectorAll('.bet-button').forEach(btn => {
-        btn.disabled = false;
-        btn.classList.remove('active');
-    });
-
+    document.querySelectorAll('.bet-button').forEach(btn => btn.disabled = false);
     document.getElementById('startButton').disabled = true;
-    document.getElementById('endButton').disabled = true;
 }
 
 function updateWalletBalance(amount) {
     walletBalance += amount;
     updateWalletDisplay();
-
-    if (walletBalance <= 0) {
-        showModal("You have no money to play. Please refresh the page to restart.");
-        document.querySelectorAll('.bet-button').forEach(btn => btn.disabled = true);
-    }
 }
 
+// Modal handling functions
 function showModal(message) {
     const modal = document.getElementById('modal');
     const modalMessage = document.getElementById('modalMessage');
-    
     modalMessage.textContent = message;
     modal.style.display = 'flex';
 }
@@ -185,5 +178,5 @@ function closeWelcomeModal() {
     welcomeModal.style.display = 'none';
 }
 
-// Call the welcome popup when the page loads
+// Show welcome popup on page load
 window.onload = showWelcomePopup;
