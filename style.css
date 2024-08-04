@@ -107,11 +107,28 @@ button:hover:not(:disabled) {
 }
 
 .box.green {
-    background-color: var(--dark-moss-green);
+    background-color: green;
+    background-image: url('pngtree-money-clipart-with-sack-png-image_5826043.png');  /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: transparent;  /* Hide the text */
+    
 }
 
 .box.red {
     background-color: rgb(162, 0, 0);
+    background-image: url('Fuse-Bomb-PNG-Download-Image.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: transparent;
+}
+
+img{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
 }
 
 /* Modal styling */
